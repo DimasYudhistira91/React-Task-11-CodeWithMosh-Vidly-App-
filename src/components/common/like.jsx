@@ -1,11 +1,14 @@
 import React from 'react';
 
 const Like = (props) => {
+  let heartImg = 'fa fa-heart';
+  if(props.liked) heartImg += '-o'
   return (
     <i
       onClick={props.onClick}
       style={{cursor: 'pointer'}}
-      className={props.liked ? 'fas fa-heart' : 'far fa-heart'}
+      className={heartImg}
+      aria-hidden='true'
     />
   );
 } 
