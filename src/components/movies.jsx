@@ -29,7 +29,7 @@ class Movies extends Component {
   }
 
   handleDelete = del => {
-    const movies = this.state.movies.sfilter(m => m._id !== del._id);
+    const movies = this.state.movies.filter(m => m._id !== del._id);
     this.setState({movies})
   };
 
@@ -41,14 +41,7 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 })
   }
 
-  handleSort = path => {
-    const sortColumn = {...this.state.sortColumn};
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
-    else {
-      sortColumn.path = path;
-      sortColumn.order = 'asc';
-    }
+  handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
 
@@ -77,6 +70,7 @@ class Movies extends Component {
           <p>Menampilkan { filtered.length } film dari database</p>
           <MovieTable
             movies={movies}
+            sortColumn={sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}
